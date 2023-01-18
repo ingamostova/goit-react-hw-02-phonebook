@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-typos */
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
