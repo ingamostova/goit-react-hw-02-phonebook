@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { Button } from './ContactItem.styled';
 
@@ -17,6 +16,7 @@ export const ContactItem = ({ contact: { id, name, number }, onDelete }) => {
 
 ContactItem.propTypes = {
   contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }),

@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { List, ListItem } from './ContactList.styled';
 
-export const ContactList = ({ items, title, onDelete }) => {
+export const ContactList = ({ items, onDelete }) => {
   return (
     <List>
       {items.map(item => (
@@ -16,7 +15,10 @@ export const ContactList = ({ items, title, onDelete }) => {
 };
 
 ContactList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
   onDelete: PropTypes.func.isRequired,
 };

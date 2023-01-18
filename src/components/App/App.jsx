@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-import { Container, Title, Contacts } from './App.styled';
+import { Section } from 'components/Section/Section';
+import { Notification } from 'components/Notification/Notification';
+import { Container } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -19,6 +19,14 @@ export class App extends Component {
   };
 
   addContact = (name, number) => {
+    if (
+      this.state.contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
@@ -39,21 +47,27 @@ export class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-    const { addContact, state, searchContact, filterContacts, deleteContact } =
-      this;
+    const { addContact, searchContact, filterContacts, deleteContact } = this;
 
     return (
       <Container>
-        <Title>Phonebook</Title>
-        <ContactForm onSubmit={addContact} contacts={contacts} />
+        <Section title="Phonebook">
+          <ContactForm onSubmit={addContact} contacts={contacts} />
+        </Section>
 
-        <Contacts>Contacts</Contacts>
-        <Filter onChange={searchContact} value={filter} />
-        <ContactList
-          title="Contacts"
-          items={filterContacts(contacts)}
-          onDelete={deleteContact}
-        />
+        <Section title="Contacts">
+          {contacts.length > 0 ? (
+            <>
+              <Filter onChange={searchContact} value={filter} />
+              <ContactList
+                items={filterContacts(contacts)}
+                onDelete={deleteContact}
+              />
+            </>
+          ) : (
+            <Notification message="Ooops, there is no contact in your phonebook" />
+          )}
+        </Section>
       </Container>
     );
   }

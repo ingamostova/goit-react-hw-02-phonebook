@@ -1,5 +1,5 @@
-/* eslint-disable react/no-typos */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/no-typos */
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -19,14 +19,6 @@ const initialValues = {
 export const ContactForm = ({ onSubmit, contacts }) => {
   const handleSubmit = (values, { resetForm }) => {
     const { name, number } = values;
-
-    for (const contact of contacts) {
-      if (contact.name === name) {
-        alert(`${contact.name} is already in contacts`);
-        return;
-      }
-    }
-
     onSubmit(name, number);
     resetForm();
   };
@@ -54,7 +46,7 @@ export const ContactForm = ({ onSubmit, contacts }) => {
   );
 };
 
-ContactForm.proptypes = {
+ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(PropTypes.object),
 };
