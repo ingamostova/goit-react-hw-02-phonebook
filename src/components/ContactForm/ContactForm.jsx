@@ -16,7 +16,7 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = ({ onSubmit, contacts }) => {
+export const ContactForm = ({ onSubmit }) => {
   const handleSubmit = (values, { resetForm }) => {
     const { name, number } = values;
     onSubmit(name, number);
@@ -48,5 +48,4 @@ export const ContactForm = ({ onSubmit, contacts }) => {
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(PropTypes.object),
 };
